@@ -19,7 +19,6 @@ function playRound(playerSelection, computerChoice){
     computerChoice=getComputerChoice();
     playerSelection=playerSelection.toLowerCase();
     if (playerSelection === computerChoice){
-        
         return "tie";
     } else {
         switch (playerSelection){
@@ -53,8 +52,9 @@ function playRound(playerSelection, computerChoice){
                             return "winner";
                 }
                 break;
+        
         }
-        }
+    }
 }
 
 //5 round of rock, paper, scissors
@@ -70,17 +70,24 @@ function game(){
     let computerScore=0;
     for (i=1;i<=5;i++){
         playerSelection=prompt("Rock, Paper, Scissor?");
-        switch(playRound(playerSelection)){
-            case "winner" : 
-                playerScore++;
-                break;
-            case "loser" : 
-                computerScore++;
-                break; 
-            case "tie":
-                alert("Its a tie");
+        if (
+            playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors"){
                 i--;
-                break;
+                alert("Invalid choice! Try again!"); 
+    
+        } else {
+            switch(playRound(playerSelection)){
+                case "winner" : 
+                    playerScore++;
+                    break;
+                case "loser" : 
+                    computerScore++;
+                    break; 
+                case "tie":
+                    alert("Its a tie! Try again!");
+                    i--;
+                    break;
+            }
         }
         console.log("Player score: " + playerScore + " Computer score: " + computerScore);
     }
