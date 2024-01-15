@@ -1,5 +1,4 @@
 
-//get the random choice for computer
 function getComputerChoice(){
     let randomNumber = Math.floor(Math.random()*3)+1;
     switch(randomNumber){
@@ -12,46 +11,46 @@ function getComputerChoice(){
 
 let playerScore=0;
 let computerScore=0;
+const result = document.querySelector("#result");
 
-//play a round
-//if its a tie return tie
-//if player wins return winner
-//if player loses return loser
 function playRound(playerSelection, computerChoice){
     computerChoice=getComputerChoice();
     if (playerSelection === computerChoice){
-        console.log("Its a tie!")
-        return "tie";
+        result.textContent="It's a tie, try again!";
+        return;
     } else {
         switch (playerSelection){
             case "rock":
                 switch (computerChoice){
                     case "paper": 
-                            console.log("You lose! "+computerChoice+" beats "+playerSelection);
+                            result.textContent="You lose! "+computerChoice+" beats "+playerSelection;
                             computerScore++;
+                            return;
                     case "scissors":
-                            console.log("You win! "+playerSelection+" beats "+computerChoice);
+                            result.textContent="You win! "+playerSelection+" beats "+computerChoice;
                             playerScore++;
+                            return;
                 }
                 break; 
             case "paper":
                 switch (computerChoice){
                     case "scissors": 
-                            console.log("You lose! "+computerChoice+" beats "+playerSelection);
+                            result.textContent="You lose! "+computerChoice+" beats "+playerSelection;
                             computerScore++;
-                    case "rock":
-                            console.log("You win! "+playerSelection+" beats "+computerChoice);
+                            return;
+                    case "rock": 
+                            result.textContent= "You win! "+playerSelection+" beats "+computerChoice;
                             playerScore++;
+                            return;
                 }
                 break;
             case "scissors":
                 switch (computerChoice){
                     case "rock": 
-                            console.log("You lose! "+computerChoice+" beats "+playerSelection);
+                            result.textContent= "You lose! "+computerChoice+" beats "+playerSelection;
                             computerScore++;
-                            return "loser";
-                    case "paper":
-                            console.log("You win! "+playerSelection+" beats "+computerChoice);
+                    case "paper": 
+                            result.textContent= "You win! "+playerSelection+" beats "+computerChoice;
                             playerScore++;
                 }
                 break;
@@ -64,7 +63,7 @@ const btnRock = document.querySelector("#btnRock");
 btnRock.addEventListener("click", ()=> {
             playRound("rock");
             scoreContainer.textContent = 
-                "Your score: " + playerScore + "; Computer score: " + computerScore + ";" ;
+                "Your score: " + playerScore + " ; Computer score: " + computerScore;
             }
 );
 
@@ -72,7 +71,7 @@ const btnPaper = document.querySelector("#btnPaper");
 btnPaper.addEventListener("click", () => {
             playRound("paper");
             scoreContainer.textContent = 
-                "Your score: " + playerScore + "; Computer score: " + computerScore + ";" ;
+                "Your score: " + playerScore + " ; Computer score: " + computerScore;
             }
 );
 
@@ -80,7 +79,7 @@ const btnScissors = document.querySelector("#btnScissors");
 btnScissors.addEventListener("click", () => {
             playRound("scissors");
             scoreContainer.textContent = 
-                "Your score: " + playerScore + "; Computer score: " + computerScore + ";" ;
+                "Your score: " + playerScore + " ; Computer score: " + computerScore;
             }
 );
 
