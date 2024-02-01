@@ -9,42 +9,23 @@ const table = [
   ["A1", "B1", "C1", "D1", "E1", "F1", "G1", "H1"],
 ];
 
-function getPossibleSteps(rootX, rootY) {
+function getPossibleSteps(arr) {
   let steps = [];
-  if (rootX + 2 <= 7 && rootY - 1 >= 0) {
-    steps.push(table[rootX + 2][rootY - 1]);
-  }
-  if (rootX + 1 <= 7 && rootY - 2 >= 0) {
-    steps.push(table[rootX + 1][rootY - 2]);
-  }
-  if (rootX - 1 >= 0 && rootY - 2 >= 0) {
-    steps.push(table[rootX - 1][rootY - 2]);
-  }
-  if (rootX - 2 >= 0 && rootY - 1 >= 0) {
-    steps.push(table[rootX - 2][rootY - 1]);
-  }
-  if (rootX - 2 >= 0 && rootY + 1 <= 7) {
-    steps.push(table[rootX - 2][rootY + 1]);
-  }
-  if (rootX - 1 >= 0 && rootY + 2 <= 7) {
-    steps.push(table[rootX - 1][rootY + 2]);
-  }
-  if (rootX + 1 <= 7 && rootY + 2 <= 7) {
-    steps.push(table[rootX + 1][rootY + 2]);
-  }
-  if (rootX + 2 <= 7 && rootY + 1 >= 0) {
-    steps.push(table[rootX + 2][rootY + 1]);
-  }
-
+  if (arr[0] + 2 <= 7 && arr[1] - 1 >= 0) steps.push(table[arr[0] + 2][arr[1] - 1]);
+  if (arr[0] + 1 <= 7 && arr[1] - 2 >= 0) steps.push(table[arr[0] + 1][arr[1] - 2]);
+  if (arr[0] - 1 >= 0 && arr[1] - 2 >= 0) steps.push(table[arr[0] - 1][arr[1] - 2]);
+  if (arr[0] - 2 >= 0 && arr[1] - 1 >= 0) steps.push(table[arr[0] - 2][arr[1] - 1]);
+  if (arr[0] - 2 >= 0 && arr[1] + 1 <= 7) steps.push(table[arr[0] - 2][arr[1] + 1]);
+  if (arr[0] - 1 >= 0 && arr[1] + 2 <= 7) steps.push(table[arr[0] - 1][arr[1] + 2]);
+  if (arr[0] + 1 <= 7 && arr[1] + 2 <= 7) steps.push(table[arr[0] + 1][arr[1] + 2]);
+  if (arr[0] + 2 <= 7 && arr[1] + 1 >= 0) steps.push(table[arr[0] + 2][arr[1] + 1]);
   return steps;
 }
 
 function findCoord(string) {
   for (let i = 0; i < 8; i++) {
     for (let y = 0; y < 8; y++) {
-      if (string === table[i][y]) {
-        return [i, y];
-      }
+       if (string === table[i][y]) return [i, y];
     }
   }
 }
@@ -56,41 +37,29 @@ class LinkedNode {
   }
 }
 
-function csiko(honnan, hova) {
-  if (honnan == hova) {
+function knight(from, dest) {
+  if (from === dest) {    
+    
     return null;
-  } else {
-    let current = new LinkedNode(honnan);
-    let queue = [];
-    let possibleSteps = getPossibleSteps(
-      findCoord(current.value)[0],
-      findCoord(current.value)[1]
-    );
+  }
+  let current = new LinkedNode(from);
+  let queue = [current];
+  let possibleSteps = getPossibleSteps(findCoord(current.value));
+  while (queue[0].value !== dest) {
+    current = queue.shift(0);
+    possibleSteps = getPossibleSteps(findCoord(current.value));
     for (let i = 0; i < possibleSteps.length; i++) {
       queue.push(new LinkedNode(possibleSteps[i], current));
     }
-    while (queue[0].value !== hova) {
-      current = queue.shift(0);
-      possibleSteps = getPossibleSteps(
-        findCoord(current.value)[0],
-        findCoord(current.value)[1]
-      );
-      for (let i = 0; i < possibleSteps.length; i++) {
-        queue.push(new LinkedNode(possibleSteps[i], current));
-      }
-    }
-    return getSteps(queue[0]);
   }
+  let array = [queue[0]];
+  current=queue[0];
+  while (current.next) {
+    array.unshift(current.next);
+    current = current.next;
+  }
+
+  return array;
 }
 
-function getSteps(LinkedNode) {
-    let array = [LinkedNode];
-    current = LinkedNode;
-    while (current.next) {
-      array.unshift(current.next);
-      current = current.next;
-    }
-    return array;
-  }
-
-console.log(csiko("C3", "H3"));
+console.log(knight("C2", "H7"));
