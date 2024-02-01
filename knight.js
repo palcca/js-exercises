@@ -68,7 +68,6 @@ function knight(from, dest) {
 
 function printPath(from, dest) {
   let map = knight(from, dest);
-  console.log(map);
   let Table = [[], [], [], [], [], [], [], []];
   for (let i = 0; i < 8; i++) {
     for (let y = 0; y < 8; y++) {
@@ -81,7 +80,7 @@ function printPath(from, dest) {
     Table[map[m][0]][map[m][1]] = m;
   }
   Table[map[map.length-1][0]][map[map.length-1][1]]="X"
-  console.log(Table);
+  console.log(table.join("");
   for (let i = 0; i < 8; i++) {
     console.log(Table[i].join("|"));
   }
