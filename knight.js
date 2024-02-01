@@ -79,7 +79,6 @@ function csiko(honnan, hova) {
         queue.push(new LinkedNode(possibleSteps[i], current));
       }
     }
-    console.log(count);
     return getSteps(queue[0]);
   }
 }
