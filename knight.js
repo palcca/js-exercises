@@ -79,11 +79,11 @@ function printPath(from, dest) {
   for (let m = 1; m < map.length; m++) {
     Table[map[m][0]][map[m][1]] = m;
   }
-  Table[map[map.length-1][0]][map[map.length-1][1]]="X"
-  
+  Table[map[map.length-1][0]][map[map.length-1][1]]="X";
+  console.log("  "+table.join(" "));
   for (let i = 0; i < 8; i++) {
-    console.log(Table[i].join("|"));
+    console.log(i+ " " + Table[i].join("|"));
   }
 }
 
-printPath("A0", "H7");
+printPath("A0", "H0");
