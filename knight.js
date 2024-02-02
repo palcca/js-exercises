@@ -80,7 +80,7 @@ function printPath(from, dest) {
     Table[map[m][0]][map[m][1]] = m;
   }
   Table[map[map.length-1][0]][map[map.length-1][1]]="X"
-  console.log(table.join("");
+  
   for (let i = 0; i < 8; i++) {
     console.log(Table[i].join("|"));
   }
