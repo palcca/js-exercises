@@ -87,4 +87,4 @@ function printPath(from, dest) {
 }
 
 printPath("G0", "A2");
-console.log("Use printPath() for new route. This was printPath('G0', 'A2')).");
+console.log("Use printPath() for new route. This was printPath('G0', 'A2').");
